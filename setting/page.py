@@ -1,4 +1,14 @@
 sub_page_data = {
+    "competition": {
+        "points": {
+            (950, 320): [109, 84, 89],
+            (950, 400): [109, 84, 89],
+            (1106, 400): [109, 84, 89],
+            (1106, 420): [109, 84, 89],
+        },
+        "sub_image_position": [434, 561, 901, 940],
+        "expect_page_list": ["app_main"],
+    },
     "set_name": {
         "points": {
             (435, 200): [12, 195, 107],
@@ -58,7 +68,7 @@ sub_page_data = {
         },
         "sub_image_position": [382, 447, 654, 678],
         "expect_page_list": ["chose_support_card"],
-    },    
+    },
     "options": {
         "points": {
             (350, 200): [12, 195, 109],

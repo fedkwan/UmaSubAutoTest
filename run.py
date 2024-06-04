@@ -91,6 +91,11 @@ def check_close():
 
 def page_action(page):
 
+    if page == "competition":
+        d.click(650, 70)
+        time.sleep(DEFAULT_SLEEP_TIME * 2)
+        return True
+
     if page == "app_main":
         if np.all(screen[898, 680] == np.array([117, 50, 255])):
             d.click(650, 915)
