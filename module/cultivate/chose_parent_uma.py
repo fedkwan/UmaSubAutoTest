@@ -52,6 +52,11 @@ def chose_parent_uma(d: u2.connect, setting_dic: dict):
 
             # 否则就选自己的吧
             else:
+                """d.click(360, 780)
+                time.sleep(DEFAULT_SLEEP_TIME * 2)
+                d.click(360, 1080)
+                time.sleep(DEFAULT_SLEEP_TIME * 2)
+                return"""
                 d.click(520, 1220)
                 time.sleep(DEFAULT_SLEEP_TIME * 2)
                 break

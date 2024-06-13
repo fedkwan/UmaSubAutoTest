@@ -91,6 +91,11 @@ def check_close():
 
 def page_action(page):
 
+    if page == "mumu_main":
+        d.click(360, 980)
+        time.sleep(DEFAULT_SLEEP_TIME * 2)
+        return True
+
     if page == "competition":
         d.click(650, 70)
         time.sleep(DEFAULT_SLEEP_TIME * 2)
@@ -145,7 +150,7 @@ def page_action(page):
 
         d.click(360, 580)
         time.sleep(DEFAULT_SLEEP_TIME * 2)
-        d.send_keys("20240602")
+        d.send_keys("20240612")
         time.sleep(DEFAULT_SLEEP_TIME * 2)
         d.click(360, 830)
         time.sleep(DEFAULT_SLEEP_TIME * 2)

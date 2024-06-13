@@ -25,6 +25,7 @@ def chose_uma(d: u2.connect, p_ocr: PaddleOCR, setting_dic: dict):
     if best_match is not None:
         click_x, click_y = best_match["result"]
         d.click(click_x, click_y)
+        time.sleep(DEFAULT_SLEEP_TIME * 2)
 
 
 
