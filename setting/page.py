@@ -1,14 +1,4 @@
 sub_page_data = {
-    "mumu_main": {
-        "points": {
-            (1190, 320): [10, 10, 9],
-            (1190, 360): [10, 10, 9],
-            (1190, 400): [10, 10, 8],
-            (1180, 360): [11, 10, 9],
-        },
-        "sub_image_position": [70, 143, 645, 718],
-        "expect_page_list": ["app_main"],
-    },
     "competition": {
         "points": {
             (950, 320): [109, 84, 89],
@@ -19,7 +9,7 @@ sub_page_data = {
         "sub_image_position": [434, 561, 901, 940],
         "expect_page_list": ["app_main"],
     },
-    "set_name": {
+    "trainer_log_in": {
         "points": {
             (435, 200): [12, 195, 107],
             (435, 210): [12, 195, 107],
@@ -49,16 +39,6 @@ sub_page_data = {
         "sub_image_position": [220, 270, 1090, 1110],  # x0, x1, y0, y1
         "expect_page_list": ["chose_scenario"],
     },
-    "chose_scenario": {
-        "points": {
-            (222, 500): [101, 54, 247],
-            (222, 520): [101, 54, 247],
-            (222, 630): [101, 54, 247],
-            (222, 650): [101, 54, 247],
-        },
-        "sub_image_position": [527, 620, 127, 157],
-        "expect_page_list": ["chose_uma"],
-    },
     "chose_uma": {
         "points": {
             (460, 150): [36, 217, 121],
@@ -70,6 +50,16 @@ sub_page_data = {
         "expect_page_list": ["chose_parent_uma"],
     },
     "chose_parent_uma": {
+        "points": {
+            (460, 150): [36, 217, 121],
+            (460, 410): [36, 217, 121],
+            (460, 670): [36, 217, 121],
+            (180, 520): [80, 144, 255],
+        },
+        "sub_image_position": [382, 447, 654, 678],
+        "expect_page_list": ["chose_support_card"],
+    },
+    "chose_parent_uma_detail": {
         "points": {
             (460, 150): [36, 217, 121],
             (460, 410): [36, 217, 121],

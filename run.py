@@ -89,47 +89,41 @@ def check_close():
         return True
 
 
-def page_action(page):
+def page_action(page, screen):
 
-    if page == "mumu_main":
-        d.click(360, 980)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
-        return True
-
+    # 跳到竞赛页面来重置账户
     if page == "competition":
         d.click(650, 70)
         time.sleep(DEFAULT_SLEEP_TIME * 2)
-        return True
+        return
 
     if page == "app_main":
         if np.all(screen[898, 680] == np.array([117, 50, 255])):
             d.click(650, 915)
-            time.sleep(DEFAULT_SLEEP_TIME * 2)
-            return True
+            return
         else:
             d.click(550, 1080)
-            time.sleep(DEFAULT_SLEEP_TIME * 2)
-            return True
-
-    if page == "chose_scenario":
-        chose_scenario(d, setting_dic)
-        d.click(360, 1080)
-        time.sleep(DEFAULT_SLEEP_TIME * 6)
-        return
+            return
 
     if page == "chose_uma":
         chose_uma(d, p_ocr, setting_dic)
         d.click(360, 1080)
-        time.sleep(DEFAULT_SLEEP_TIME * 6)
         return
 
     if page == "chose_parent_uma":
-        if chose_parent_uma(d, setting_dic) is False:
+        # 如果没有【遗传树】的灰色，右边没有就点右边
+        if np.all(screen[775, 555] != np.array([196, 196, 196])):
+            d.click(450, 800)
+            return
+        elif np.all(screen[775, 215] != np.array([196, 196, 196])):
+            d.click(110, 800)
             return
         else:
             d.click(360, 1080)
-            time.sleep(DEFAULT_SLEEP_TIME * 6)
             return
+        
+    if page == "chose_parent_uma_detail":
+        chose_parent_uma_detail()
 
     if page == "chose_support_card":
         chose_support_card(d, setting_dic)
@@ -138,23 +132,20 @@ def page_action(page):
 
     if page == "cultivate_main":
         d.click(650, 1230)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
         return
 
-    if page == "set_name":
-
-        # 将数据写入到JSON文件
-        _data = {"already_focus": 0}
-        with open(ROOT_DIR + "/running.json", "w") as f:
-            json.dump(_data, f)
-
-        d.click(360, 580)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
-        d.send_keys("20240612")
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
-        d.click(360, 830)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
-        d.click(360, 830)
+    if page == "trainer_log_in":
+        bottom_point = screen[1150, 400]  # 底部输入框的白色
+        first_number_point = screen[
+            585, 200
+        ]  # 训练员名称默认为2024，此为第一个2的底部的颜色
+        if np.all(first_number_point == np.array([255, 255, 255])):
+            if np.all(bottom_point != np.array([255, 255, 255])):
+                d.click(360, 580)
+            else:
+                d.send_keys("2024")
+        else:
+            d.click(360, 830)
         return
 
     if page == "search_friend":
@@ -218,7 +209,14 @@ def page_action(page):
         return
 
 
-setting_dic = importlib.import_module("customer_setting.setting_sub").data
+setting_dic = {
+    "uma_name": "daiwa_scarlet",
+    "uma_chinese_name": "大和赤驥",
+    "parent_uma_rank_1": 2,
+    "parent_uma_rank_2": 3,
+    "parent_uma_rank_friend": 2,
+    "support_card_png_name": "200px-Support_thumb_30016.png",
+}
 dic = sub_page_data
 page_list = []
 jam = 0
@@ -248,7 +246,7 @@ while True:
         time.sleep(DEFAULT_SLEEP_TIME)
         continue
 
-    page_action(page)
+    page_action(page, screen)
     print(page + " action done")
 
     except_page_list = dic[page]["expect_page_list"]

@@ -11,14 +11,16 @@ p_ocr = PaddleOCR()
 d = u2.connect("127.0.0.1:16384")
 screen = d.screenshot(format="opencv")
 
-pp = screen[1190, 400]
+pp = screen[1150, 360]
 print(pp)
 
+"""
 _image = cv2.imread(ROOT_DIR + "/setting/page/mumu_main.png")
 handler = ImageHandler()
 match = handler.find_sub_image(_image, screen)
 if match:
     print(match)
+"""
 """
 cropped_image = screen[11:37, 610:690]
 

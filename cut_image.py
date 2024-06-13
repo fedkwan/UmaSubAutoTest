@@ -13,7 +13,7 @@ screen = d.screenshot(format="opencv")
 
 
 print(screen.shape)
-cropped_image = screen[901:940, 434:561]
+cropped_image = screen[979:1004, 40:186]
 cv2.imwrite("cut" + str(time.time()) + ".png", cropped_image)
 
 # text_recognizer = TextRecognizer(cropped_image, ocr)
