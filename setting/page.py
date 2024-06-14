@@ -57,7 +57,7 @@ sub_page_data = {
             (180, 520): [80, 144, 255],
         },
         "sub_image_position": [382, 447, 654, 678],
-        "expect_page_list": ["chose_support_card"],
+        "expect_page_list": ["chose_support_card", "chose_parent_uma_detail"],
     },
     "chose_parent_uma_detail": {
         "points": {
@@ -66,7 +66,7 @@ sub_page_data = {
             (460, 670): [36, 217, 121],
             (180, 520): [80, 144, 255],
         },
-        "sub_image_position": [382, 447, 654, 678],
+        "sub_image_position": [40, 186, 979, 1004],
         "expect_page_list": ["chose_support_card"],
     },
     "options": {

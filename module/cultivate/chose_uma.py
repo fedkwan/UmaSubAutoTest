@@ -5,7 +5,7 @@ from paddleocr import PaddleOCR
 from method.image_handler import *
 
 
-def chose_uma(d: u2.connect, screen: np.array, p_ocr: PaddleOCR, setting_dic: dict):
+def chose_uma(d: u2.connect, p_ocr: PaddleOCR, screen: np.array, setting_dic: dict):
 
     uma_name = setting_dic["uma_name"]
 

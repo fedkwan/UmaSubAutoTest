@@ -4,6 +4,7 @@ from method.image_handler import *
 
 from setting.base import *
 
+"""
 ort.set_default_logger_severity(3)
 ocr = ddddocr.DdddOcr()
 p_ocr = PaddleOCR()
@@ -14,7 +15,7 @@ screen = d.screenshot(format="opencv")
 pp = screen[1150, 360]
 print(pp)
 
-"""
+
 _image = cv2.imread(ROOT_DIR + "/setting/page/mumu_main.png")
 handler = ImageHandler()
 match = handler.find_sub_image(_image, screen)
@@ -35,3 +36,5 @@ num = find_numbers_in_string(text, "rude")
 print(text)
 print(num)
 """
+
+

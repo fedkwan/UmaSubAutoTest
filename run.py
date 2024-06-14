@@ -1,7 +1,7 @@
 import time
-import importlib
 import uiautomator2 as u2
 import json
+from datetime import datetime
 
 import ddddocr
 
@@ -13,7 +13,7 @@ from setting.page import *
 from method.image_handler import *
 from module.cultivate.chose_scenario import *
 from module.cultivate.chose_uma import *
-from module.cultivate.chose_parent_uma import *
+from module.cultivate.chose_parent_uma_detail import *
 from module.cultivate.chose_support_card import *
 from setting.destroy_account import *
 
@@ -89,7 +89,7 @@ def check_close():
         return True
 
 
-def page_action(page, screen):
+def page_action(page, p_ocr, screen, setting_dic):
 
     # 跳到竞赛页面来重置账户
     if page == "competition":
@@ -99,6 +99,18 @@ def page_action(page, screen):
 
     if page == "app_main":
         if np.all(screen[898, 680] == np.array([117, 50, 255])):
+
+            # 初始化每日10次皇冠
+            _path = ROOT_DIR + "/running.json"
+            with open(_path, "r", encoding="utf-8") as _f:
+                _data = json.load(_f)
+            _current_date = datetime.now().strftime("%Y-%m-%d")
+            if _data["date"] != _current_date:
+                _data["date"] = _current_date
+                _data["crown_times"] = 0
+                with open(_path, "w", encoding="utf-8") as _f:
+                    json.dump(_data, _f, ensure_ascii=False, indent=4)
+
             d.click(650, 915)
             return
         else:
@@ -106,28 +118,28 @@ def page_action(page, screen):
             return
 
     if page == "chose_uma":
-        chose_uma(d, p_ocr, setting_dic)
+        chose_uma(d, p_ocr, screen, setting_dic)
         d.click(360, 1080)
         return
 
     if page == "chose_parent_uma":
         # 如果没有【遗传树】的灰色，右边没有就点右边
-        if np.all(screen[775, 555] != np.array([196, 196, 196])):
-            d.click(450, 800)
-            return
-        elif np.all(screen[775, 215] != np.array([196, 196, 196])):
+        if np.all(screen[775, 215] != np.array([196, 196, 196])):
             d.click(110, 800)
+            return
+        elif np.all(screen[775, 555] != np.array([196, 196, 196])):
+            d.click(450, 800)
             return
         else:
             d.click(360, 1080)
             return
-        
+
     if page == "chose_parent_uma_detail":
-        chose_parent_uma_detail()
+        chose_parent_uma_detail(d, screen, setting_dic)
+        return
 
     if page == "chose_support_card":
         chose_support_card(d, setting_dic)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
         return
 
     if page == "cultivate_main":
@@ -135,10 +147,10 @@ def page_action(page, screen):
         return
 
     if page == "trainer_log_in":
-        bottom_point = screen[1150, 400]  # 底部输入框的白色
-        first_number_point = screen[
-            585, 200
-        ]  # 训练员名称默认为2024，此为第一个2的底部的颜色
+        # 底部输入框的白色
+        bottom_point = screen[1150, 400]
+        # 训练员名称默认为2024，此为第一个2的底部的颜色
+        first_number_point = screen[585, 200]
         if np.all(first_number_point == np.array([255, 255, 255])):
             if np.all(bottom_point != np.array([255, 255, 255])):
                 d.click(360, 580)
@@ -246,7 +258,7 @@ while True:
         time.sleep(DEFAULT_SLEEP_TIME)
         continue
 
-    page_action(page, screen)
+    page_action(page, p_ocr, screen, setting_dic)
     print(page + " action done")
 
     except_page_list = dic[page]["expect_page_list"]
