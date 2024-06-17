@@ -65,8 +65,8 @@ def check_find():
     sub_image_file_li = get_png_files(ROOT_DIR + "/setting/find")
     for sub_image_file in sub_image_file_li:
         file_name_li = sub_image_file[0:-4].split("-")
-        [click_x, click_y] = list(map(int, file_name_li[0].split(",")))
-        [x0, x1, y0, y1] = list(map(int, file_name_li[1].split(",")))
+        [click_x, click_y] = list(map(int, file_name_li[-2].split(",")))
+        [x0, x1, y0, y1] = list(map(int, file_name_li[-1].split(",")))
         sub_image = cv2.imread(ROOT_DIR + "/setting/find/" + sub_image_file)
         handler = ImageHandler()
         _match = handler.is_sub_image_in_box(
@@ -98,6 +98,7 @@ def page_action(page, p_ocr, screen, setting_dic):
         return
 
     if page == "app_main":
+       
         if np.all(screen[898, 680] == np.array([117, 50, 255])):
 
             # 初始化每日10次皇冠
@@ -118,6 +119,17 @@ def page_action(page, p_ocr, screen, setting_dic):
             return
 
     if page == "chose_uma":
+
+        cropped_image = screen[90:118, 432:512]
+        handler = ImageHandler()
+        text = handler.get_text_from_image(ocr, cropped_image)
+        num = find_numbers_in_string(text, "rude")
+        print(num)
+        if num < 30:
+            # 跳到竞赛页面统一重置账号
+            d.click(520, 1220)
+            return
+
         chose_uma(d, p_ocr, screen, setting_dic)
         d.click(360, 1080)
         return
@@ -154,10 +166,16 @@ def page_action(page, p_ocr, screen, setting_dic):
         if np.all(first_number_point == np.array([255, 255, 255])):
             if np.all(bottom_point != np.array([255, 255, 255])):
                 d.click(360, 580)
+                time.sleep(DEFAULT_SLEEP_TIME * 2)
+                return
             else:
                 d.send_keys("2024")
+                time.sleep(DEFAULT_SLEEP_TIME * 2)
+                return
         else:
             d.click(360, 830)
+            time.sleep(DEFAULT_SLEEP_TIME * 2)
+            return
         return
 
     if page == "search_friend":
@@ -194,7 +212,7 @@ def page_action(page, p_ocr, screen, setting_dic):
             d.click(360, 480)
 
             # 将数据写入到JSON文件
-            _data = {"already_focus": 1}
+            _data["already_focus"] = 1
             with open(ROOT_DIR + "/running.json", "w") as f:
                 json.dump(_data, f)
 
@@ -219,7 +237,7 @@ def page_action(page, p_ocr, screen, setting_dic):
         destroy_account(d)
         time.sleep(DEFAULT_SLEEP_TIME * 2)
         return
-
+    
 
 setting_dic = {
     "uma_name": "daiwa_scarlet",
