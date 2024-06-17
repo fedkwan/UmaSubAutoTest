@@ -245,7 +245,6 @@ setting_dic = {
     "parent_uma_rank_1": 2,
     "parent_uma_rank_2": 3,
     "parent_uma_rank_friend": 2,
-    "support_card_png_name": "200px-Support_thumb_30016.png",
 }
 dic = sub_page_data
 page_list = []
