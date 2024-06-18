@@ -93,9 +93,18 @@ def page_action(page, p_ocr, screen, setting_dic):
 
     # 跳到竞赛页面来重置账户
     if page == "competition":
-        d.click(650, 70)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
-        return
+        _data = ""
+        with open(ROOT_DIR + "/running.json", "r") as f:
+            _data = json.load(f)
+            print(_data)
+        if _data["already_focus"] == 1:
+            # 将数据写入到JSON文件
+            _data["already_focus"] = 0
+            with open(ROOT_DIR + "/running.json", "w") as f:
+                json.dump(_data, f)
+            d.click(650, 70)
+            time.sleep(DEFAULT_SLEEP_TIME * 2)
+            return
 
     if page == "app_main":
        
@@ -129,10 +138,10 @@ def page_action(page, p_ocr, screen, setting_dic):
             # 跳到竞赛页面统一重置账号
             d.click(520, 1220)
             return
-
-        chose_uma(d, p_ocr, screen, setting_dic)
-        d.click(360, 1080)
-        return
+        else:
+            chose_uma(d, p_ocr, screen, setting_dic)
+            d.click(360, 1080)
+            return
 
     if page == "chose_parent_uma":
         # 如果没有【遗传树】的灰色，右边没有就点右边
