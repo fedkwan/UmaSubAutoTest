@@ -1,6 +1,5 @@
 import time
 import uiautomator2 as u2
-from method.text_handler import *
 import onnxruntime as ort
 import cv2
 
@@ -12,7 +11,7 @@ screen = d.screenshot(format="opencv")
 # screen = cv2.imread("x.png")
 
 print(screen.shape)
-cropped_image = screen[616:673, 572:681]
+cropped_image = screen[800:850, 280:440]
 cv2.imwrite("cut" + str(time.time()) + ".png", cropped_image)
 
 # text_recognizer = TextRecognizer(cropped_image, ocr)

@@ -11,7 +11,6 @@ import numpy as np
 from setting.base import *
 from setting.page import *
 from method.image_handler import *
-from module.cultivate.chose_scenario import *
 from module.cultivate.chose_uma import *
 from module.cultivate.chose_parent_uma_detail import *
 from module.cultivate.chose_support_card import *
@@ -29,7 +28,7 @@ def get_page_and_expect_list(screen: np.array, page_list: list):
         count = sum(1 for pk, pv in p.items() if np.all(screen[pk] == np.array(pv)))
         if count == 4:
             # print("4个点的颜色匹配成功！")
-            _image = cv2.imread(ROOT_DIR + "/setting/page/" + page + ".png")
+            _image = cv2.imread(ROOT_DIR + "/resource/page/" + page + ".png")
             handler = ImageHandler()
             best_match = handler.is_sub_image_in_box2(
                 _image, screen, dic[page]["sub_image_position"]
@@ -39,9 +38,9 @@ def get_page_and_expect_list(screen: np.array, page_list: list):
 
 
 def check_click():
-    sub_image_file_li = get_png_files(ROOT_DIR + "/setting/click")
+    sub_image_file_li = get_png_files(ROOT_DIR + "/resource/click")
     for sub_image_file in sub_image_file_li:
-        sub_image = cv2.imread(ROOT_DIR + "/setting/click/" + sub_image_file)
+        sub_image = cv2.imread(ROOT_DIR + "/resource/click/" + sub_image_file)
         matcher = ImageHandler()
         best_match = matcher.find_sub_image(sub_image, screen, 0.8)
         if best_match is not None:
@@ -62,12 +61,12 @@ def check_tap():
 
 
 def check_find():
-    sub_image_file_li = get_png_files(ROOT_DIR + "/setting/find")
+    sub_image_file_li = get_png_files(ROOT_DIR + "/resource/find")
     for sub_image_file in sub_image_file_li:
         file_name_li = sub_image_file[0:-4].split("-")
         [click_x, click_y] = list(map(int, file_name_li[-2].split(",")))
         [x0, x1, y0, y1] = list(map(int, file_name_li[-1].split(",")))
-        sub_image = cv2.imread(ROOT_DIR + "/setting/find/" + sub_image_file)
+        sub_image = cv2.imread(ROOT_DIR + "/resource/find/" + sub_image_file)
         handler = ImageHandler()
         _match = handler.is_sub_image_in_box(
             sub_image, screen, x0 - 10, x1 + 10, y0 - 10, y1 + 10
@@ -79,7 +78,7 @@ def check_find():
 
 
 def check_close():
-    sub_image = cv2.imread(ROOT_DIR + "/setting/close.png")
+    sub_image = cv2.imread(ROOT_DIR + "/resource/close.png")
     matcher = ImageHandler()
     best_match = matcher.find_sub_image(sub_image, screen, 0.8)
     if best_match is not None:
@@ -120,7 +119,6 @@ def page_action(page, p_ocr, screen, setting_dic):
                 _data["crown_times"] = 0
                 with open(_path, "w", encoding="utf-8") as _f:
                     json.dump(_data, _f, ensure_ascii=False, indent=4)
-
             d.click(650, 915)
             return
         else:
@@ -267,7 +265,8 @@ while True:
 
     page = get_page_and_expect_list(screen, page_list)
     print(page)
-    if jam >= 1:
+    if page is None:
+        time.sleep(DEFAULT_SLEEP_TIME * 2)
         if check_tap():
             continue
         if check_find():
@@ -276,12 +275,7 @@ while True:
             continue
         if check_close():
             continue
-        jam = 0
         page_list = []
-        continue
-    if page is None:
-        jam += 1
-        time.sleep(DEFAULT_SLEEP_TIME)
         continue
 
     page_action(page, p_ocr, screen, setting_dic)
