@@ -36,7 +36,7 @@ class ImageHandler:
             if x0 < center[0] < x1 and y0 < center[1] < y1:
                 return True
         return False
-    
+
     @staticmethod
     def is_sub_image_in_box2(
         small_image: np.array,
@@ -74,15 +74,6 @@ class ImageHandler:
             return "".join(_)
         except Exception as e:
             return str(e)
-
-    # 计算两个颜色是否接近，请使用 B,G,R 顺序
-    @staticmethod
-    def count_color_diff(
-        point_bgr_1: list, point_bgr_2: list, tolerance: int = 10
-    ) -> bool:
-        distance = np.sqrt(np.sum((np.array(point_bgr_1) - np.array(point_bgr_2)) ** 2))
-        print(distance)
-        return distance < tolerance
 
 
 # test
