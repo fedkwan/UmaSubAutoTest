@@ -22,8 +22,8 @@ logging.getLogger("ddddocr").setLevel(logging.ERROR)
 
 
 def get_page_and_expect_list(dic: dict, screen: np.array, page_list: list):
-    pages_to_check = page_list if len(page_list) != 0 else dic.keys()
-    for page in pages_to_check:
+    page_to_check = page_list if len(page_list) != 0 else dic.keys()
+    for page in page_to_check:
         p = dic[page]["points"]
         count = sum(1 for pk, pv in p.items() if np.all(screen[pk] == np.array(pv)))
         if count == 4:
@@ -208,6 +208,34 @@ def page_action(page, p_ocr, screen, setting_dic):
         d.click(360, 300)
         return
 
+    if page == "last_confirm":
+        d.click(520, 1180)
+        return
+
+    if page == "event_shorten_setting":
+        d.click(360, 920)
+        return
+
+    if page == "confirm_skip_empty":
+        d.click(270, 700)
+        return
+    
+    if page == "confirm_skip_select":
+        d.click(520, 830)
+        return
+
+    if page == "cultivate_main":
+        d.click(650, 1230)
+        return
+
+    if page == "menu":
+        d.click(560, 560)
+        return
+
+    if page == "give_up":
+        d.click(520, 830)
+        return
+
     # 跳到竞赛页面来重置账户
     if page == "competition":
         _data = ""
@@ -222,10 +250,6 @@ def page_action(page, p_ocr, screen, setting_dic):
             d.click(650, 70)
             time.sleep(DEFAULT_SLEEP_TIME * 2)
             return
-
-    if page == "cultivate_main":
-        d.click(650, 1230)
-        return
 
     if page == "trainer_log_in":
         # 底部输入框的白色
@@ -245,16 +269,6 @@ def page_action(page, p_ocr, screen, setting_dic):
             d.click(360, 830)
             time.sleep(DEFAULT_SLEEP_TIME * 2)
             return
-
-    if page == "menu":
-        d.click(560, 560)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
-        return
-
-    if page == "options":
-        d.click(560, 560)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
-        return
 
     if page == "destroy_account":
         destroy_account(d)

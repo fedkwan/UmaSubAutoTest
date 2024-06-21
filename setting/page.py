@@ -88,7 +88,11 @@ sub_page_data = {
             (790, 660): [162, 102, 255],
         },
         "sub_image_position": [472, 562, 901, 930],
-        "expect_page_list": ["chose_support_card", "chose_friend_support_card"],
+        "expect_page_list": [
+            "chose_support_card",
+            "chose_friend_support_card",
+            "last_confirm",
+        ],
     },
     "chose_support_card": {
         "points": {
@@ -107,8 +111,78 @@ sub_page_data = {
             (80, 520): [12, 197, 113],
             (80, 530): [12, 197, 113],
         },
-        "sub_image_position": [539, 568, 1070, 1092],
+        "sub_image_position": [512, 664, 230, 258],
         "expect_page_list": ["support_card"],
+    },
+    "last_confirm": {
+        "points": {
+            (80, 200): [12, 197, 113],
+            (80, 210): [12, 197, 113],
+            (80, 520): [12, 197, 113],
+            (80, 530): [12, 197, 113],
+        },
+        "sub_image_position": [385, 443, 357, 380],
+        "expect_page_list": ["confirm_skip_empty", "cultivate_main"],
+    },
+    "confirm_skip_empty": {
+        "points": {
+            (435, 200): [12, 195, 107],
+            (435, 210): [12, 195, 107],
+            (435, 510): [12, 195, 107],
+            (435, 520): [12, 195, 107],
+        },
+        "sub_image_position": [243, 297, 681, 738],
+        "expect_page_list": ["confirm_skip_select"],
+    },
+    "confirm_skip_select": {
+        "points": {
+            (435, 200): [12, 195, 107],
+            (435, 210): [12, 195, 107],
+            (435, 510): [12, 195, 107],
+            (435, 520): [12, 195, 107],
+        },
+        "sub_image_position": [243, 297, 681, 738],
+        "expect_page_list": ["cultivate_main"],
+    },
+    "event_shorten_setting": {
+        "points": {
+            (350, 200): [12, 195, 109],
+            (350, 210): [12, 195, 109],
+            (350, 510): [12, 195, 109],
+            (350, 520): [12, 195, 109],
+        },
+        "sub_image_position": [60, 90, 420, 450],
+        "expect_page_list": ["cultivate_main"],
+    },    
+    "cultivate_main": {
+        "points": {
+            (840, 600): [204, 187, 14],
+            (840, 690): [204, 187, 14],
+            (850, 600): [204, 187, 14],
+            (850, 690): [204, 187, 14],
+        },
+        "sub_image_position": [560, 640, 957, 1037],
+        "expect_page_list": ["menu"],
+    },
+    "menu": {
+        "points": {
+            (350, 200): [12, 195, 109],
+            (350, 210): [12, 195, 109],
+            (350, 510): [12, 195, 109],
+            (350, 520): [12, 195, 109],
+        },
+        "sub_image_position": [519, 596, 539, 577],
+        "expect_page_list": ["give_up"],
+    },
+    "give_up": {
+        "points": {
+            (435, 200): [12, 195, 107],
+            (435, 210): [12, 195, 107],
+            (435, 510): [12, 195, 107],
+            (435, 520): [12, 195, 107],
+        },
+        "sub_image_position": [480, 556, 816, 854],
+        "expect_page_list": ["app_main"],
     },
     "competition": {
         "points": {
@@ -130,16 +204,6 @@ sub_page_data = {
         "sub_image_position": [413, 474, 647, 710],
         "expect_page_list": ["app_main"],
     },
-    "options": {
-        "points": {
-            (350, 200): [12, 195, 109],
-            (350, 210): [12, 195, 109],
-            (350, 510): [12, 195, 109],
-            (350, 520): [12, 195, 109],
-        },
-        "sub_image_position": [519, 596, 539, 577],
-        "expect_page_list": ["app_main"],
-    },
     "destroy_account": {
         "points": {
             (80, 200): [12, 197, 113],
@@ -149,15 +213,5 @@ sub_page_data = {
         },
         "sub_image_position": [34, 139, 119, 151],
         "expect_page_list": ["app_main"],
-    },
-    "cultivate_main": {
-        "points": {
-            (840, 600): [204, 187, 14],
-            (840, 690): [204, 187, 14],
-            (850, 600): [204, 187, 14],
-            (850, 690): [204, 187, 14],
-        },
-        "sub_image_position": [560, 640, 957, 1037],
-        "expect_page_list": ["train", "event", "match_list", "skill"],
     },
 }
