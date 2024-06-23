@@ -158,23 +158,23 @@ def page_action(page, p_ocr, screen, setting_dic):
 
     if page == "search_id":
         # 底部输入框的白色
-        bottom_point = screen[1200, 400]
+        bottom_point = screen[1150, 400]
         # 此为【请输入训练员ID】的D字的灰色
         wood_gray = np.array([120, 144, 177])
         id_d_point = screen[585, 430]
         # 如果【请输入训练员ID】字样还在
         if np.all(id_d_point == wood_gray):
             if np.all(bottom_point != np.array([255, 255, 255])):
-                d.click(360, 580)
-                time.sleep(DEFAULT_SLEEP_TIME * 2)
+                d.click(360, 590)
+                time.sleep(DEFAULT_SLEEP_TIME * 4)
                 return
             else:
                 d.send_keys("736088380579")
-                time.sleep(DEFAULT_SLEEP_TIME * 2)
+                time.sleep(DEFAULT_SLEEP_TIME * 4)
                 return
         else:
             d.click(520, 830)
-            time.sleep(DEFAULT_SLEEP_TIME * 2)
+            time.sleep(DEFAULT_SLEEP_TIME * 4)
             return
 
     if page == "friend_detail":
@@ -201,7 +201,7 @@ def page_action(page, p_ocr, screen, setting_dic):
         return
 
     if page == "chose_support_card":
-        chose_support_card(d, setting_dic)
+        chose_support_card(d, screen)
         return
 
     if page == "chose_friend_support_card":
@@ -219,7 +219,7 @@ def page_action(page, p_ocr, screen, setting_dic):
     if page == "confirm_skip_empty":
         d.click(270, 700)
         return
-    
+
     if page == "confirm_skip_select":
         d.click(520, 830)
         return
@@ -228,7 +228,7 @@ def page_action(page, p_ocr, screen, setting_dic):
         d.click(650, 1230)
         return
 
-    if page == "menu":
+    if page == "cultivate_menu":
         d.click(560, 560)
         return
 
@@ -247,13 +247,22 @@ def page_action(page, p_ocr, screen, setting_dic):
             _data["already_focus"] = 0
             with open(ROOT_DIR + "/running.json", "w") as f:
                 json.dump(_data, f)
-            d.click(650, 70)
-            time.sleep(DEFAULT_SLEEP_TIME * 2)
-            return
+        d.click(650, 70)
+        time.sleep(DEFAULT_SLEEP_TIME * 2)
+        return
+
+    if page == "app_menu":
+        d.click(410, 390)
+        return
+
+    if page == "destroy_account":
+        destroy_account(d)
+        time.sleep(DEFAULT_SLEEP_TIME * 2)
+        return
 
     if page == "trainer_log_in":
         # 底部输入框的白色
-        bottom_point = screen[1150, 400]
+        bottom_point = screen[1180, 400]
         # 训练员名称默认为2024，此为第一个2的底部的颜色
         first_number_point = screen[585, 200]
         if np.all(first_number_point == np.array([255, 255, 255])):
@@ -269,11 +278,6 @@ def page_action(page, p_ocr, screen, setting_dic):
             d.click(360, 830)
             time.sleep(DEFAULT_SLEEP_TIME * 2)
             return
-
-    if page == "destroy_account":
-        destroy_account(d)
-        time.sleep(DEFAULT_SLEEP_TIME * 2)
-        return
 
 
 page_list = []

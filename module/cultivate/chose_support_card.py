@@ -38,6 +38,7 @@ def chose_support_card(d: u2.connect, screen: np.array):
     # 这里是选择支援
     sub_image_file_li = get_png_files(ROOT_DIR + "/resource/support_card")
     for sub_image_file in sub_image_file_li:
+        print(sub_image_file)
         sub_image = cv2.imread(ROOT_DIR + "/resource/support_card/" + sub_image_file)
         matcher = ImageHandler()
         best_match = matcher.find_sub_image(sub_image, screen, 0.8)
@@ -50,5 +51,5 @@ def chose_support_card(d: u2.connect, screen: np.array):
 # test
 if __name__ == "__main__":
     _d = u2.connect("127.0.0.1:16384")
-    _setting_dic = importlib.import_module("customer_setting.setting_1").data
-    chose_support_card(_d, _setting_dic)
+    _screen = _d.screenshot(format="opencv")
+    chose_support_card(_d, _screen)

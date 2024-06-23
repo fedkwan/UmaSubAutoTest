@@ -153,7 +153,7 @@ sub_page_data = {
         },
         "sub_image_position": [60, 90, 420, 450],
         "expect_page_list": ["cultivate_main"],
-    },    
+    },
     "cultivate_main": {
         "points": {
             (840, 600): [204, 187, 14],
@@ -164,7 +164,7 @@ sub_page_data = {
         "sub_image_position": [560, 640, 957, 1037],
         "expect_page_list": ["menu"],
     },
-    "menu": {
+    "cultivate_menu": {
         "points": {
             (350, 200): [12, 195, 109],
             (350, 210): [12, 195, 109],
@@ -194,15 +194,15 @@ sub_page_data = {
         "sub_image_position": [434, 561, 901, 940],
         "expect_page_list": ["app_main"],
     },
-    "trainer_log_in": {
+    "app_menu": {
         "points": {
-            (435, 200): [12, 195, 107],
-            (435, 210): [12, 195, 107],
-            (435, 510): [12, 195, 107],
-            (435, 520): [12, 195, 107],
+            (80, 200): [12, 197, 113],
+            (80, 210): [12, 197, 113],
+            (80, 520): [12, 197, 113],
+            (80, 530): [12, 197, 113],
         },
-        "sub_image_position": [413, 474, 647, 710],
-        "expect_page_list": ["app_main"],
+        "sub_image_position": [390, 630, 360, 420],
+        "expect_page_list": ["destroy_account"],
     },
     "destroy_account": {
         "points": {
@@ -212,6 +212,16 @@ sub_page_data = {
             (80, 530): [12, 197, 113],
         },
         "sub_image_position": [34, 139, 119, 151],
+        "expect_page_list": ["app_main"],
+    },
+    "trainer_log_in": {
+        "points": {
+            (435, 200): [12, 195, 107],
+            (435, 210): [12, 195, 107],
+            (435, 510): [12, 195, 107],
+            (435, 520): [12, 195, 107],
+        },
+        "sub_image_position": [413, 474, 647, 710],
         "expect_page_list": ["app_main"],
     },
 }
