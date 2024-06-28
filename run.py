@@ -306,7 +306,7 @@ while True:
     page_action(page, p_ocr, screen, setting_dic)
     print(page + " action done")
 
-    except_page_list = sub_page_data[page]["expect_page_list"]
-    print(except_page_list)
+    page_list = sub_page_data[page]["expect_page_list"]
+    print(page_list)
 
     time.sleep(DEFAULT_SLEEP_TIME * 2)
